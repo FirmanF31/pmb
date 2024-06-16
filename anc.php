@@ -1,4 +1,6 @@
-
+<?php
+include 'koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,7 +50,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">MENU</div>
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="anc.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 ANC
                             </a>
@@ -82,6 +84,8 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                     TAMBAH ANC
                                 </button>
+                                <a href="export.php" class="btn btn-info">Export Data PMB</a>
+                                <a href="pkm-anc.php" class="btn btn-info">Export Data PKM</a>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -106,24 +110,49 @@
                                         </tr>
                                     </thead>
                                      <tbody>
+                                        <?php
+                                        $getdataanc = mysqli_query($conn, "SELECT * FROM anc");
+                                        while($data=mysqli_fetch_array($getdataanc)){
+                                            $i = $data['no_reg'];
+                                            $tgl_reg = $data['tanggal'];
+                                            $nama = $data['nama'];
+                                            $suami = $data['suami'];
+                                            $tgl_lhr = $data['tanggal_lahir'];
+                                            $alamat = $data['alamat'];
+                                            $hpht = $data['hpht'];
+                                            $tp = $data['tp'];
+                                            $keluhan = $data['keluhan'];
+                                            $bb_tb = $data['bb_tb'];
+                                            $tfu_lp = $data['tfu_lp'];
+                                            $lila = $data['lila'];
+                                            $td = $data['td'];
+                                            $suhu = $data['suhu'];
+                                            $diagnosa = $data['diagnosa'];
+                                            $penatalaksanaan = $data['penatalaksanaan'];
+                                        
+                                                    
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2011/04/25</td>
-                                            <td>Nenden</td>
-                                            <td>Firman</td>
-                                            <td>2011/04/25</td>
-                                            <td>Alamat</td>
-                                            <td>HPHT</td>
-                                            <td>TP</td>
-                                            <td>Keluhan</td>
-                                            <td>BB</td>
-                                            <td>TFU</td>
-                                            <td>Lila</td>
-                                            <td>TD</td>
-                                            <td>Suhu</td>
-                                            <td>Diagnosa</td>
-                                            <td>Penatalaksana</td>
+                                            <td><?=$i?></td>
+                                            <td><?=$tgl_reg?></td>
+                                            <td><?=$nama?></td>
+                                            <td><?=$suami?></td>
+                                            <td><?=$tgl_lhr?></td>
+                                            <td><?=$alamat?></td>
+                                            <td><?=$hpht?></td>
+                                            <td><?=$tp?></td>
+                                            <td><?=$keluhan?></td>
+                                            <td><?=$bb_tb?></td>
+                                            <td><?=$tfu_lp?></td>
+                                            <td><?=$lila?></td>
+                                            <td><?=$td?></td>
+                                            <td><?=$suhu?></td>
+                                            <td><?=$diagnosa?></td>
+                                            <td><?=$penatalaksanaan?></td>
                                         </tr>
+                                        <?php
+                                        };
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -169,19 +198,23 @@
                 <form method="POST" action="create.php">
                 <div class="modal-body">
                     <br>
+                    <label>Tanggal Masuk</label>
                     <input type="date" name="tgl_reg" placeholder="Tanggal hari ini" class="form-control">
                     <br>
                     <input type="text" name="nama" placeholder="Nama Pasien" class="form-control">
                     <br>
                     <input type="text" name="suami" placeholder="Nama Suami" class="form-control">
                     <br>
+                    <label>Tanggal Lahir</label>
                     <input type="date" name="tgl_lhr" placeholder="Tanggal Lahir" class="form-control">
                     <br>
                     <input type="text" name="alamat" placeholder="Alamat" class="form-control">
                     <br>
-                    <input type="text" name="hpht" placeholder="Masukan HPHT" class="form-control">
+                    <label>Tanggal HPHT</label>                        
+                    <input type="date" name="hpht" placeholder="Masukan HPHT" class="form-control">
                     <br>
-                    <input type="text" name="tp" placeholder="Masukan TP" class="form-control">
+                    <label>Tanggal TP</label>
+                    <input type="date" name="tp" placeholder="Masukan TP" class="form-control">
                     <br>
                     <input type="text" name="keluhan" placeholder="Masukan Keluhan" class="form-control">
                     <br>
